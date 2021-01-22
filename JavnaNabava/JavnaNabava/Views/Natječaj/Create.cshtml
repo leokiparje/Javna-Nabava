@@ -1,0 +1,80 @@
+﻿@model Natječaj
+
+@{ 
+    ViewBag.Title = "Novi natječaj";
+}
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="EvidBrojNatječaj"></label>
+        <div><span asp-validation-for="EvidBrojNatječaj" class="text-danger">Evidencijski broj će se izgenerirati prilikom stvaranja!</span></div>
+        
+    </div>
+    <div class="form-group">
+        <label asp-for="NazivNatječaja"></label>
+        <div><span asp-validation-for="NazivNatječaja" class="text-danger"></span></div>
+        <input asp-for="NazivNatječaja" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RokZaDostavu"></label>
+        <div><span asp-validation-for="RokZaDostavu" class="text-danger"></span></div>
+        <input asp-for="RokZaDostavu" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LimitNatječaja"></label>
+        <div><span asp-validation-for="LimitNatječaja" class="text-danger"></span></div>
+        <input asp-for="LimitNatječaja" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TrajanjeUgovora"></label>
+        <div><span asp-validation-for="TrajanjeUgovora" class="text-danger"></span></div>
+        <input asp-for="TrajanjeUgovora" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="IdStatusaNatječaja"></label>
+        <div><span asp-validation-for="IdStatusaNatječaja" class="text-danger"></span></div>
+        <select class="form-control" asp-for="IdStatusaNatječaja" asp-items="ViewBag.Statusi">
+            <option selected value="" disabled>Odaberite status:</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EvidBrojPlan"></label>
+        <div><span asp-validation-for="EvidBrojPlan" class="text-danger"></span></div>
+        <select class="form-control" asp-for="EvidBrojPlan" asp-items="ViewBag.PlanoviNabave">
+            <option selected value="" disabled>Odaberite plan nabave:</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IdKriterija"></label>
+        <div><span asp-validation-for="IdKriterija" class="text-danger"></span></div>
+        <select class="form-control" asp-for="IdKriterija" asp-items="ViewBag.Kriteriji">
+            <option selected value="" disabled>Odaberite kriterij:</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IdVrstePostupka"></label>
+        <div><span asp-validation-for="IdVrstePostupka" class="text-danger"></span></div>
+        <select class="form-control" asp-for="IdVrstePostupka" asp-items="ViewBag.VrstePostupaka">
+            <option selected value="" disabled>Odaberite vrstu postupka:</option>
+        </select>
+    </div>
+
+
+
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+        <a asp-action="Index" class="btn btn-secondary">Odustani</a>
+    </div>
+
+</form>
+
+@section scripts {
+    <partial name="IncludeValidation" />
+}

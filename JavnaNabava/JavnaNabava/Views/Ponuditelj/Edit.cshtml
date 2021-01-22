@@ -1,0 +1,40 @@
+﻿@using JavnaNabava.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Ponuditelj
+
+@{ ViewBag.Title = "Ažuriranje ponuditelja"; }
+
+<form asp-action="Edit" asp-route-page="@ViewBag.Page" asp-route-sort="@ViewBag.Sort" asp-route-ascending="@ViewBag.Ascending" method="post">
+    <div asp-validation-summary="All"></div>
+
+    @*<input type="hidden" asp-for="OibPonuditelj" /> *@
+
+    @*<div class="form-group">
+            <label asp-for="OibPonuditelj"></label>
+            <div><span asp-validation-for="OibPonuditelj" class="text-danger"></span></div>
+            <input asp-for="OibPonuditelj" class="form-control" />
+        </div> *@
+    <div class="form-group">
+        <label asp-for="NazivPonuditelj"></label>
+        <div><span asp-validation-for="NazivPonuditelj" class="text-danger"></span></div>
+        <input asp-for="NazivPonuditelj" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="AdresaPonuditelj"></label>
+        <div><span asp-validation-for="AdresaPonuditelj" class="text-danger"></span></div>
+        <input asp-for="AdresaPonuditelj" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SjedištePonuditelj"></label>
+        <div><span asp-validation-for="SjedištePonuditelj" class="text-danger"></span></div>
+        <input asp-for="SjedištePonuditelj" class="form-control" />
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Ažuriraj</button>
+        <a asp-action="Index" asp-route-page="@ViewBag.Page" asp-route-sort="@ViewBag.Sort" asp-route-ascending="@ViewBag.Ascending" class="btn btn-secondary">Odustani</a>
+    </div>
+</form>
+
+@section scripts {
+    <partial name="IncludeValidation" />
+}

@@ -1,0 +1,58 @@
+﻿@model PlanNabave
+
+@{ 
+    ViewBag.Title = "Novi plan nabave";
+}
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="EvidBrojPlan"></label>
+        <div><span asp-validation-for="EvidBrojPlan" class="text-danger">Evidencijski broj će se izgenerirati prilikom stvaranja!</span></div>
+    </div>
+    <div class="form-group">
+        <label asp-for="TrajanjeNabave"></label>
+        <div><span asp-validation-for="TrajanjeNabave" class="text-danger"></span></div>
+        <input asp-for="TrajanjeNabave" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="VrijednostNabave"></label>
+        <div><span asp-validation-for="VrijednostNabave" class="text-danger"></span></div>
+        <input asp-for="VrijednostNabave" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ŠifraCpv"></label>
+        <div><span asp-validation-for="ŠifraCpv" class="text-danger"></span></div>
+        <select class="form-control" asp-for="ŠifraCpv" asp-items="ViewBag.CPV">
+            <option selected value="" disabled>Odaberite CPV</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="OibNaručitelja"></label>
+        <div><span asp-validation-for="OibNaručitelja" class="text-danger"></span></div>
+        <select class="form-control" asp-for="OibNaručitelja" asp-items="ViewBag.Naručitelji">
+            <option selected value="" disabled>Odaberite naručitelja</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IdDjelatnosti"></label>
+        <div><span asp-validation-for="IdDjelatnosti" class="text-danger"></span></div>
+        <select class="form-control" asp-for="IdDjelatnosti" asp-items="ViewBag.Djelatnosti">
+            <option selected value="" disabled>Odaberite djelatnost</option>
+        </select>
+    </div>
+
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+        <a asp-action="Index" class="btn btn-secondary">Odustani</a>
+    </div>
+
+</form>
+
+@section scripts {
+    <partial name="IncludeValidation" />
+}

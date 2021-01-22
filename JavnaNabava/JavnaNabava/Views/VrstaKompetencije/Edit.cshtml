@@ -1,0 +1,25 @@
+﻿@model VrstaKompetencije
+@using JavnaNabava.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@{
+    ViewBag.Title = "Ažuriranje kompetencije";
+}
+
+
+
+<form asp-action="Edit" asp-route-page="@ViewBag.Page" asp-route-sort="@ViewBag.Sort"
+    asp-route-ascending="@ViewBag.Ascending" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="NazivKompetencije">Naziv</label>
+        <input asp-for="NazivKompetencije" class="form-control" />
+    </div>
+
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Ažuriraj</button>
+        <a asp-action="Index" asp-route-page="@ViewBag.Page" asp-route-sort="@ViewBag.Sort"
+            asp-route-ascending="@ViewBag.Ascending" class="btn btn-secondary">Odustani</a>
+    </div>
+</form>

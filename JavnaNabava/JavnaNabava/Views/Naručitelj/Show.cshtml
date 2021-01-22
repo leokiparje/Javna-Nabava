@@ -1,0 +1,53 @@
+﻿@model NaručiteljaViewModel
+@{
+    ViewBag.Title = "Naručitelj br. " + @Model.oibNaručitelj;
+}
+
+<div class="container">
+
+    <div class="row justify-content-sm-center">
+        
+        <div class="col-sm-1 text-left">
+            <a class="btn btn-sm btn-primary cancel"
+               asp-action="Index"
+               asp-route-page="@ViewBag.Page"
+               asp-route-sort="@ViewBag.Sort"
+               asp-route-ascending="@ViewBag.Ascending"
+               asp-route-filter="@ViewBag.Filter"
+               title="Povratak na popis naručitelja">
+                <i class="fas fa-backward"></i>
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-sm table-striped table-hover">
+        <thead>
+            <tr>
+                <th>                  
+                        Evidencijski broj
+                </th>
+
+                <th>
+                        Vrijednost nabave
+                </th>
+
+                <th>
+                        CPV
+                </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var plan in Model.Planovi)
+            {
+                <tr>
+                    <td class="text-left">@plan.evidBrojPlan</td>
+                    <td class="text-left">@plan.vrijednost</td>
+                    <td class="text-left">@plan.CPV</td>
+                    
+                </tr>
+            }
+        </tbody>
+
+    </table>

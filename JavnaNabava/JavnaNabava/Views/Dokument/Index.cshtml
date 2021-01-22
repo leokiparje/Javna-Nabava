@@ -1,0 +1,54 @@
+@model JavnaNabava.ViewModels.DokumentiViewModel
+
+@{
+  ViewBag.Title = "Dokumenti";
+}
+
+<h2>Popis dokumenata</h2>
+<h7>Jednostavni tablični prikaz, straničenje i sortiranje na serverskoj strani, 
+  dodavanje novog podatka, ažuriranje jednostavnog podatka, brisanje podatka, potvrda prije brisanja podatka,
+   validacija, prikaz pojedinačnog složenog podatka</h7>
+<p></p>
+<a asp-action="Create">Unos novog dokumenta</a>
+
+<pager page-info="@Model.PagingInfo" page-action="Index" page-title="Unesite željenu stranicu"
+     class="float-right">
+</pager>
+
+<table class="table table-sm table-striped table-hover">
+  <thead>
+    <tr>
+      @{
+        string[] nazivi = {"Naziv dokumenta", "Vrsta dokumenta", "Blob", "Naslov Ponude" ,"Datum Predaje" };
+        for (int i = 1; i <= nazivi.Length; i++)
+        {
+          <th>
+            <a asp-route-sort="@i"
+               asp-route-page="@Model.PagingInfo.CurrentPage"
+               asp-route-ascending="@(Model.PagingInfo.Sort == i ? !Model.PagingInfo.Ascending : true)">
+              @nazivi[i - 1]
+            </a>
+          </th>
+        }
+      }
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+<tbody>
+        @foreach (var dokument in Model.Dokumenti)
+        {
+           <partial name="Row" model="dokument" />
+        }
+    
+  </tbody>
+</table>
+
+@section scripts {
+  <script src="~/js/pager.js" asp-append-version="true"></script>
+    <script>
+        $(function () {
+            SetDeleteAjax(".deleteajax", '@Url.Action("Delete")', 'kont');
+        });
+    </script>
+}

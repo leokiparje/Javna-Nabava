@@ -1,0 +1,73 @@
+﻿@model JavnaNabava.ViewModels.VrstaKompetencijeViewModel;
+
+
+@{
+    ViewData["Title"] = "Popis vrsta kompetencije";
+}
+
+<pager page-info="@Model.PagingInfo" page-title="Unesite željenu stranicu" page-action="Index" class="float-right">
+
+</pager>
+
+<div>
+    <h3>Popis vrsta kompetencije</h3>
+</div>
+
+<h6>Jednostavni tablični prikaz, straničenje i sortiranje na serverskoj strani, dodavanje novog podatka, ažuriranje
+    jednostavnog podatka, brisanje podatka, potvrda prije brisanja podatka, validacija</h6>
+
+
+
+
+<a asp-action="Create" class="btn btn-secondary">Unesi novu kompetenciju</a>
+
+<table class="table table-sm table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                <a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage"
+                    asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? !Model.PagingInfo.Ascending: true)">
+                    ID
+                </a>
+
+            </th>
+            <th>
+                <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage"
+                    asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? !Model.PagingInfo.Ascending: true)">
+                    Naziv
+                </a>
+            </th>
+            <th>
+                Operacije
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var kompetencija in Model.Kompetencije)
+        {
+            <tr>
+                <td class="text-left">@kompetencija.IdKompetencije</td>
+                <td class="text-left">@kompetencija.NazivKompetencije</td>
+                <td class="btn-group">
+
+                    <a asp-action="Edit" asp-route-id="@kompetencija.IdKompetencije"
+                        asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-sort="@Model.PagingInfo.Sort"
+                        asp-route-ascending="@Model.PagingInfo.Ascending" class="btn btn-info btn-sm mr-2" title="Ažuriraj">
+                        <i class="fas fa-edit"></i>
+                    </a>
+
+                    <form asp-action="Delete" method="POST" asp-route-page="@Model.PagingInfo.CurrentPage"
+                        asp-route-sort="@Model.PagingInfo.Sort" asp-route-ascending="@Model.PagingInfo.Ascending">
+
+                        <input type="hidden" name="idKompetencije" value="@kompetencija.IdKompetencije" />
+                        <button type="submit" class="btn btn-sm btn-danger delete" title="Obriši">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

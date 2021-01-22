@@ -1,0 +1,107 @@
+﻿@model JavnaNabava.ViewModels.PlanNabaveViewModel
+
+
+
+
+@{
+    ViewData["Title"] = "Popis planova nabave";
+}
+
+<pager page-info="@Model.PagingInfo" page-title="Unesite željenu stranicu" page-action="Index" class="float-right">
+
+</pager>
+
+<div>
+    <h4>Popis planova nabave</h4>
+
+    <div> <tagsmall>Jednostavni tablični prikaz - prikaz naziva iz roditeljske tablice, odabir vrijednosti vezanih podataka korištenjem padajuće liste</tagsmall></div>
+</div>
+
+
+
+<a asp-action="Create" class="btn btn-outline-dark">Unesi novi plan nabave</a>
+
+<table class="table table-sm table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                <a asp-route-sort="1"
+                   asp-route-page="@Model.PagingInfo.CurrentPage"
+                   asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? !Model.PagingInfo.Ascending: true)">
+                    Evidencijski broj
+                </a>
+
+            </th>
+            <th>
+                <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage"
+                   asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? !Model.PagingInfo.Ascending: true)">
+                    Trajanje nabave
+                </a>
+            </th>
+
+            <th>
+                <a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage"
+                   asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? !Model.PagingInfo.Ascending: true)">
+                    Vrijednost nabave
+                </a>
+            </th>
+
+            <th>
+                <a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage"
+                   asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? !Model.PagingInfo.Ascending: true)">
+                    CPV
+                </a>
+            </th>
+
+            <th>
+                <a asp-route-sort="5" asp-route-page="@Model.PagingInfo.CurrentPage"
+                   asp-route-ascending="@(Model.PagingInfo.Sort == 5 ? !Model.PagingInfo.Ascending: true)">
+                    Naručitelj
+                </a>
+            </th>
+
+            <th>
+                <a asp-route-sort="6" asp-route-page="@Model.PagingInfo.CurrentPage"
+                   asp-route-ascending="@(Model.PagingInfo.Sort == 6 ? !Model.PagingInfo.Ascending: true)">
+                    Djelatnost
+                </a>
+            </th>
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var plan in Model.PlanoviNabave)
+        {
+            <tr>
+                <td class="text-left">@plan.EvidBrojPlan</td>
+                <td class="text-left">@plan.TrajanjeNabave</td>
+                <td class="text-left">@plan.VrijednostNabave</td>
+                <td class="text-left">@plan.ŠifraCpvNavigation.NazivCpv</td>
+                <td class="text-left">@plan.OibNaručiteljaNavigation.NazivNaručitelja</td>
+                <td class="text-left">@plan.IdDjelatnostiNavigation.NazivDjelatnosti</td>
+                <td class="btn-group">
+
+
+
+
+                    <form asp-action="Delete" method="POST"
+                          asp-route-page="@Model.PagingInfo.CurrentPage"
+                          asp-route-sort="@Model.PagingInfo.Sort"
+                          asp-route-ascending="@Model.PagingInfo.Ascending">
+
+                        <input type="hidden" name="evidBrojPlan" value="@plan.EvidBrojPlan" />
+                        <button type="submit" class="btn btn-sm btn-danger delete" title="Obriši"></button>
+                        <i class="fas fa-trash-alt"></i>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@section scripts {
+    <partial name="IncludeValidation" />
+}

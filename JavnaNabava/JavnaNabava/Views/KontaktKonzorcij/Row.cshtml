@@ -1,0 +1,20 @@
+﻿@model KontaktKonzorcijViewModel
+
+<tr>
+    <td class="text-center">@Model.KontaktK</td>
+    <td class="text-center">@Model.NazivKonzorcij</td>
+    <td class="text-center">@Model.NazivVrstaKontakta</td>
+    <td>
+        <a class="btn btn-sm" title="Ažuriraj">
+            <i class="fas fa-edit"></i>
+        </a>
+    </td>
+    <td>
+        <form asp-action="Delete" method="POST">
+            <input type="hidden" name="id" value="@Model.KontaktK" />
+            <button type="submit" class="btn btn-sm btn-danger" title="Obriši">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </form>
+    </td>
+</tr>

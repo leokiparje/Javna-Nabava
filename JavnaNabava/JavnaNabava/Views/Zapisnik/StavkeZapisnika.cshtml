@@ -1,0 +1,56 @@
+﻿@model IEnumerable<StavkaZapisnikViewModel>
+
+<table class="table table-striped" id="table-stavke">
+    <thead>
+        <tr>
+            @{ 
+                string[] nazivi = { "Odredba", "Prekršajna kazna", "Valjanost" };
+                for (int i = 0; i < nazivi.Length; i++)
+                {
+                    <th class="text-center">
+                        @nazivi[i]
+                    </th>
+                }
+            }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var stavka in Model)
+        {
+        <tr>
+            <td class="text-center col-sm-4">
+                <input type="hidden" name="StavkeZapisnika.Index" value="@stavka.idOdredba" />
+                <input type="hidden" name="StavkeZapisnika[@stavka.idOdredba].IdStavke" value="@stavka.idStavka" />
+                <input type="hidden" name="StavkeZapisnika[@stavka.idOdredba].idOdredba" value="@stavka.idOdredba" />
+                <input type="hidden" name="StavkeZapisnika[@stavka.idOdredba].nazivOdredba" value="@stavka.nazivOdredba" />
+                @stavka.nazivOdredba
+            </td>
+            <td class="text-center col-sm-1">
+                <input name="StavkeZapisnika[@stavka.idOdredba].cijena" class="form-control" value="@stavka.cijenaKršenjaOdluke" />
+            </td>
+            <td class="text-center col-sm-1">
+                <input name="StavkeZapisnika[@stavka.idOdredba].ispravnost" class="form-control" value="@stavka.ispravnostStavka" />
+            </td>
+            <td>
+                <button class="btn btn-sm btn-danger deleterow" title="Izbaci"><i class="fa fa-minus"></i></button>
+            </td>
+        </tr>
+        }
+        <tr>
+            <td class="text-center">
+                <input id="odredba-id" type="hidden" data-autocomplete-placeholder="odredba" readonly="readonly" />
+                <input id="odredba-naziv" type="text" data-autocomplete="odredba" />
+            </td>
+            <td class="text-center col-sm-1">
+                <input id="odredba-cijena" type="text" />
+            </td>
+            <td class="text-center col-sm-1">
+                <input id="odredba-ispravnost" type="text" />
+            </td>
+            <td class="text-left" colspan="3">
+                <button id="odredba-dodaj" class="btn btn-sm btn-secondary" title="Dodaj"><i class="fas fa-plus"></i></button>
+            </td>
+        </tr>
+    </tbody>
+</table>

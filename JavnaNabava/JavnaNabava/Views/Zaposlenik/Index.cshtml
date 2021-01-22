@@ -1,0 +1,122 @@
+﻿@model JavnaNabava.ViewModels.ZaposleniciViewModel
+
+
+
+
+@{
+    ViewData["Title"] = "Popis zaposlenika";
+}
+<pager page-info="@Model.PagingInfo" page-title="Unesite željenu stranicu" page-action="Index" class="float-right">
+
+</pager>
+
+<h6>Jednostavni tablični prikaz - prikaz naziva iz roditeljske tablice, odabir vrijednosti vezanih podataka korištenjem
+    padajuće liste, prikaz pojedinačnog složenog podatka</h6>
+
+
+<a asp-action="Create" class="btn btn-secondary">Unesi novog zaposlenika</a>
+
+<table class="table table-sm table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                <a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage"
+                    asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? !Model.PagingInfo.Ascending: true)">
+                    OIB
+                </a>
+
+            </th>
+            <th>
+                <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage"
+                    asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? !Model.PagingInfo.Ascending: true)">
+                    Ime
+                </a>
+            </th>
+
+            <th>
+                <a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage"
+                    asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? !Model.PagingInfo.Ascending: true)">
+                    Prezime
+                </a>
+            </th>
+
+            <th>
+                <a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage"
+                    asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? !Model.PagingInfo.Ascending: true)">
+                    Datum rođenja
+                </a>
+            </th>
+
+            <th>
+                <a asp-route-sort="5" asp-route-page="@Model.PagingInfo.CurrentPage"
+                    asp-route-ascending="@(Model.PagingInfo.Sort == 5 ? !Model.PagingInfo.Ascending: true)">
+                    Mjesto prebivališta
+                </a>
+            </th>
+
+            <th>
+                <a asp-route-sort="6" asp-route-page="@Model.PagingInfo.CurrentPage"
+                    asp-route-ascending="@(Model.PagingInfo.Sort == 6 ? !Model.PagingInfo.Ascending: true)">
+                    Kompetencija
+                </a>
+            </th>
+
+            <th>
+                <a asp-route-sort="7" asp-route-page="@Model.PagingInfo.CurrentPage"
+                    asp-route-ascending="@(Model.PagingInfo.Sort == 7 ? !Model.PagingInfo.Ascending: true)">
+                    Stručna sprema
+                </a>
+            </th>
+
+            <th>
+                <a asp-route-sort="8" asp-route-page="@Model.PagingInfo.CurrentPage"
+                    asp-route-ascending="@(Model.PagingInfo.Sort == 8 ? !Model.PagingInfo.Ascending: true)">
+                    Ponuditelj(poslodavac)
+                </a>
+            </th>
+
+
+            <th>
+                Operacije
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var zaposlenik in Model.Zaposlenici)
+        {
+            <tr>
+                <td class="text-left">
+                    <a asp-action="Show" asp-route-id="@zaposlenik.OibZaposlenik"
+                        asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-sort="@Model.PagingInfo.Sort"
+                        asp-route-ascending="@Model.PagingInfo.Ascending">
+                        @zaposlenik.OibZaposlenik
+                    </a>
+                </td>
+                <td class="text-left">@zaposlenik.ImeZaposlenik</td>
+                <td class="text-left">@zaposlenik.PrezimeZaposlenik</td>
+                <td class="text-left">@zaposlenik.DatumRođenja</td>
+                <td class="text-left">@zaposlenik.MjestoPrebivališta</td>
+                <td class="text-left">@zaposlenik.IdKompetencijeNavigation.NazivKompetencije</td>
+                <td class="text-left">@zaposlenik.IdStručneSpremeNavigation.NazivStručneSpreme</td>
+                <td class="text-left">@zaposlenik.OibPonuditeljNavigation.NazivPonuditelj</td>
+                <td>
+                    <div class="btn-group">
+                        <a asp-action="Edit" asp-route-id="@zaposlenik.OibZaposlenik" class="btn btn-warning btn-sm mr-2"
+                            title="Ažuriraj">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <form asp-action="Delete" method="POST" asp-route-page="@Model.PagingInfo.CurrentPage"
+                            asp-route-sort="@Model.PagingInfo.Sort" asp-route-ascending="@Model.PagingInfo.Ascending">
+
+                            <input type="hidden" name="oibZaposlenik" value="@zaposlenik.OibZaposlenik" />
+                            <button type="submit" class="btn btn-sm btn-danger delete" title="Obriši">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

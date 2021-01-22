@@ -1,0 +1,77 @@
+﻿@model ZaposlenikViewModel
+@{
+    ViewBag.Title = "Izmjena zaposlenika";
+}
+
+<div class="container">
+    <form asp-action="Edit" method="post" id="zaposlenik_form">
+        <div asp-validation-summary="All" class="form-group row"></div>
+
+        <input class="form-control" asp-for="@Model.oibZaposlenik" type="hidden"/>
+
+        <div class="form-group row">
+            <label asp-for="ImeZaposlenik" class=" col-form-label">Ime zaposlenika</label>
+                <input class="form-control" asp-for="@Model.ImeZaposlenik" />
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="PrezimeZaposlenik" class=" col-form-label">Prezime zaposlenika</label>
+                <input asp-for="PrezimeZaposlenik"  class="form-control" data-autocomplete-placeholder="prezime" />
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="DatumRođenja" class=" col-form-label">Datum rodenja</label>
+                <input asp-for="DatumRođenja"  class="form-control" data-autocomplete-placeholder="datum rodenja" />
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="MjestoPrebivališta" class=" col-form-label">Mjesto prebivalista</label>
+                <input asp-for="MjestoPrebivališta"  class="form-control" data-autocomplete-placeholder="mjesto prebivalista" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="IdKompetencije">Kompetencija:</label>
+            <div><span asp-validation-for="IdKompetencije" class="text-danger"></span></div>
+            <select class="form-control" asp-for="IdKompetencije" asp-items="ViewBag.Kompetencije">
+                <option selected value="" disabled>Odaberite kompetenciju:</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="IdStručneSpreme">Strucna sprema:</label>
+            <div><span asp-validation-for="IdStručneSpreme" class="text-danger"></span></div>
+            <select class="form-control" asp-for="IdStručneSpreme" asp-items="ViewBag.StručneSpreme">
+                <option selected value="" disabled>Odaberite stručnu spremu:</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="OibPonuditelj">Ponuditelj:</label>
+            <div><span asp-validation-for="OibPonuditelj" class="text-danger"></span></div>
+            <select class="form-control" asp-for="OibPonuditelj" asp-items="ViewBag.Ponuditelji">
+                <option selected value="" disabled>Odaberite ponuditelja(poslodavca):</option>
+            </select>
+        </div>
+
+<div class="float-right">
+
+                <button id="save" type="submit" class="btn btn btn-primary save" title="Spremi">
+                    SAVE <i class="fas fa-save"></i></button>
+                <a class="btn btn btn-primary cancel" asp-action="Index" title="Odustani">
+                    CANCEL <i class="fas fa-undo-alt"></i>
+                </a>
+</div>
+
+    </form>
+</div>
+
+@section styles{
+    <link rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.css" />
+}
+
+@section scripts{
+    <partial name="IncludeValidation" />
+    <script src="~/lib/jqueryui/jquery-ui.js"></script>
+    <script src="~/js/autocomplete.js" asp-append-version="true"></script>
+    <script src="~/js/zaposlenici.js" asp-append-version="true"></script>
+}

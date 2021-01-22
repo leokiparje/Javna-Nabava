@@ -1,0 +1,49 @@
+@model Dokument
+
+@{
+    ViewBag.Title = "Ažuriranje dokumenta";
+}
+
+<h2>Ažuriranje dokumenta</h2>
+<form asp-route-page="@ViewBag.Page" asp-route-sort="@ViewBag.Sort" asp-route-ascending="@ViewBag.Ascending"
+    asp-action="Edit" method="post">
+    <div asp-validation-summary="All"></div>
+
+    <div class="form-group">
+        <label asp-for="DokumentId"></label>
+        <div><span asp-validation-for="DokumentId" class="text-danger" /></div>
+        <label asp-for="DokumentId" class="form-control" />@Model.DokumentId</label>
+    </div>
+    <div class="form-group">
+        <label asp-for="Naslov"></label>
+        <div><span asp-validation-for="Naslov" class="text-danger" /></div>
+        <input asp-for="Naslov" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Vrsta"></label>
+        <div><span asp-validation-for="Vrsta" class="text-danger" /></div>
+        <input asp-for="Vrsta" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Blob"></label>
+        <div><span asp-validation-for="Blob" class="text-danger" /></div>
+        <input asp-for="Blob" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="PonudaId"></label>
+        <div><span asp-validation-for="PonudaId" class="text-danger" /></div>
+        <select class="form-control" asp-for="PonudaId" asp-items="ViewBag.Ponude">>
+            <option selected value="" disabled>Odaberi ponudu kojo pripada dokument</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="DatumPredaje"></label>
+        <div><span asp-validation-for="DatumPredaje" class="text-danger" /></div>
+        <input asp-for="DatumPredaje" class="form-control" />
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Spremi</button>
+        <a asp-action="Index" asp-route-page="@ViewBag.Page" asp-route-sort="@ViewBag.Sort"
+            asp-route-ascending="@ViewBag.Ascending" class="btn btn-secondary">Odustani</a>
+    </div>
+</form>

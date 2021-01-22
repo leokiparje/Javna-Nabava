@@ -1,0 +1,130 @@
+@model JavnaNabava.ViewModels.PonudaViewModel
+@{
+  ViewBag.Title = "Izmjena ponude";
+}
+
+
+<div class="container">
+  <form id="ponuda_form" method="post" asp-action="Edit"
+        asp-route-page="@ViewBag.Page"
+        asp-route-sort="@ViewBag.Sort"
+        asp-route-ascending="@ViewBag.Ascending">
+
+    <input type="hidden" asp-for="PonudaId" />
+    <div asp-validation-summary="All" class="form-group row"></div>
+
+    <div class="form-group row">
+      <label asp-for="NazivNatječaja" class="col-sm-2 col-form-label"></label>
+      <div class="col-sm-1">
+        <select class="form-control" asp-for="NazivNatječaja">
+          <option disabled selected value=""></option>
+          <option value="R">R-1</option>
+          <option value="O">O</option>
+        </select>
+      </div>
+      <label asp-for="Text" class="col-sm-1 col-form-label"></label>
+      <div class="col-sm-1">
+        <input asp-for="Text" class="form-control" />
+      </div>
+      <label asp-for="Naslov" class="col-sm-1 col-form-label"></label>
+      <div class="col-sm-2">
+        <input asp-for="Naslov" class="form-control datum" />
+      </div>
+      <div class="col-sm-2">
+        <button id="save" type="submit" class="btn btn-sm btn-primary save" title="Spremi"><i class="fas fa-save"></i></button>
+        <a class="btn btn-sm btn-primary cancel"
+           asp-action="Edit"
+           asp-route-id="@Model.PonudaId"
+           asp-route-page="@ViewBag.Page"
+           asp-route-sort="@ViewBag.Sort"
+           asp-route-ascending="@ViewBag.Ascending"
+  
+
+           title="Osvježi">
+          <i class="fas fa-sync-alt"></i>
+        </a>
+        <a class="btn btn-sm btn-primary cancel"
+           asp-action="Index"
+           asp-route-page="@ViewBag.Page"
+           asp-route-sort="@ViewBag.Sort"
+  
+           title="Odustani">
+          <i class="fas fa-undo-alt"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label asp-for="NazivPonuditelj" class="col-sm-1 col-form-label"></label>
+      <div class="col-sm-2">
+        <input asp-for="NazivPonuditelj" class="form-control" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+    
+
+    </div>
+
+
+
+@*     <div class="col-sm-10">
+      <partial name="Doks" model="Model.doks" />
+    </div> *@
+  </form>
+</div>
+<div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    @{
+                        string[] nazivi = { "DokumentId", "Naslov", "Vrsta", "Blob"," NazivPonude", "DatumPredaje" };
+                        for (int i = 0; i < nazivi.Length; i++)
+                        {
+                            <th class="text-center">
+                                @nazivi[i]
+                            </th>
+                        }
+                    }
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var stavka in Model.doks)
+                {
+                    <tr>
+                        <td class="text-left col-sm-4">
+                            <input asp-for="@stavka.DokumentId" class="form-control" />
+                        </td>
+                        <td class="text-right col-sm-1">
+                            <input asp-for="@stavka.Naslov" class="form-control" />
+                        </td>
+                        <td class="text-center col-sm-1">
+                            <input asp-for="@stavka.Vrsta" class="form-control" />
+                        </td>
+                        <td class="text-right col-sm-2">
+                           <input asp-for=" @stavka.Blob" class="form-control" />
+                        </td>
+                        <td class="text-right col-sm-2">
+                           <input asp-for=" @stavka.NazivPonude" class="form-control" />
+                        </td>
+                        <td class="text-right col-sm-2">
+                           <input asp-for=" @stavka.DatumPredaje" class="form-control" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+@section styles{
+  <link rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.css" />
+}
+
+@section scripts{
+  <partial name="IncludeValidation" />
+  <script src="~/lib/jqueryui/jquery-ui.js"></script>
+  <script src="~/js/autocomplete.js" asp-append-version="true"></script>
+  <script src="~/js/dokumenti.js" asp-append-version="true"></script>
+}

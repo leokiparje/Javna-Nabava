@@ -1,0 +1,81 @@
+﻿@model JavnaNabava.ViewModels.KonzorcijiViewModel
+
+@{
+    ViewData["title"] = "Popis konzorcija";
+}
+
+<a asp-action="Create">Unos novog konzorcija</a>
+
+<h6>
+    Jednostavni tablični prikaz, straničenje i sortiranje na serverskoj strani, dodavanje novog podatka, ažuriranje jednostavnog podatka, brisanje podatka, potvrda prije brisanja podatka, validacija, prikaz pojedinačnog složenog podatka (primjer konzorcija koji ima člana: Konzorcij1)
+</h6>
+
+<pager page-info="@Model.PagingInfo" page-title="Unesite željenu stranicu" page-action="Index" class="float-right">
+
+</pager>
+
+<table class="table table-sm table-striped table-hover">
+    <thead>
+        <tr>
+            <th class="text-center">
+                <a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? !Model.PagingInfo.Ascending : true)">
+                    ID konzorcija
+                </a>
+            </th>
+            <th class="text-center">
+                <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? !Model.PagingInfo.Ascending : true)">
+                    Naziv konzorcija
+                </a>
+            </th>
+            
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var konzorcij in Model.Konzorciji)
+        {
+        <tr>
+            <td class="text-center">
+                <a asp-action="Show"
+                   asp-route-id="@konzorcij.IdKonzorcij"
+                   asp-route-page="@Model.PagingInfo.CurrentPage"
+                   asp-route-sort="@Model.PagingInfo.Sort"
+                   asp-route-ascending="@Model.PagingInfo.Ascending">
+                    @konzorcij.IdKonzorcij
+                </a>
+            </td>
+            <td class="text-center">@konzorcij.NazivKonzorcij</td>
+            
+
+
+
+            <td class="btn-group">
+                <a asp-action="Edit" asp-route-id="@konzorcij.IdKonzorcij" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-sort="@Model.PagingInfo.Sort" asp-route-ascending="@Model.PagingInfo.Ascending" class="btn bt-sm" title="Ažuriraj">
+                    <i class="fas fa-edit"></i>
+                </a>
+
+
+                <form asp-action="Delete" method="POST" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-sort="@Model.PagingInfo.Sort" asp-route-ascending="@Model.PagingInfo.Ascending">
+                    <input type="hidden" name="IdKonzorcij" value="@konzorcij.IdKonzorcij" />
+                    <button type="submit" class="btn btn-sm btn-danger delete" title="Obriši">
+
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+            </td>
+
+
+
+        </tr>
+            }
+
+        
+
+
+    </tbody>
+</table>
+
+@section scripts {
+    <script src="~/js/pager.js" asp-append-version="true"></script>
+}

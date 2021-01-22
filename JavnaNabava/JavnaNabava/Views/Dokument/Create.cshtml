@@ -1,0 +1,49 @@
+﻿@using JavnaNabava.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Dokument
+@{
+  ViewBag.Title = "Novi Dokument";
+}
+
+<h2>Unos novog dokumenta</h2>
+
+<form asp-action="Create" method="post">
+  <div asp-validation-summary="All"></div>
+  <div class="form-group">
+    <label asp-for="Naslov"></label>
+    <div><span asp-validation-for="Naslov" class="text-danger"></span></div>
+    <input asp-for="Naslov" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label asp-for="Vrsta"></label>
+    <div><span asp-validation-for="Vrsta" class="text-danger"></span></div>
+    <input asp-for="Vrsta" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label asp-for="Blob"></label>
+    <div><span asp-validation-for="Blob" class="text-danger"></span></div>
+    <input asp-for="Blob" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label asp-for="PonudaId"></label>
+    <div><span asp-validation-for="PonudaId" class="text-danger"></span></div>
+    <select class="form-control" asp-for="PonudaId" asp-items="ViewBag.Ponude">
+      <option disabled selected value="">Odaberite ponudu</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label asp-for="DatumPredaje"></label>
+    <div><span asp-validation-for="DatumPredaje" class="text-danger"></span></div>
+    <input asp-for="DatumPredaje" class="form-control" />
+  </div>
+  <div class="text-center">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+        <a asp-action="Index" class="btn btn-secondary">Odustani</a>
+  </div>
+
+  
+</form>
+
+@section scripts {
+  <partial name="IncludeValidation" />
+}

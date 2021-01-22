@@ -1,0 +1,32 @@
+﻿@model Povjerenstvo
+
+@{
+    ViewBag.Title = "Ažuriranje povjerenstva";
+}
+
+<form asp-action="Edit" method="post" asp-route-page="@ViewBag.Page" asp-route-sort="@ViewBag.Sort" asp-route-ascending="@ViewBag.Ascending">
+    <div asp-validation-summary="All"></div>
+
+    <div class="form-group">
+        <label asp-for="NazivPovjerenstva"></label>
+        <div><span asp-validation-for="NazivPovjerenstva" class="text-danger"></span></div>
+        <input asp-for="NazivPovjerenstva" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EvidBrojNatječaj"></label>
+        <div><span asp-validation-for="EvidBrojNatječaj" class="text-danger"></span></div>
+        <select class="form-control" asp-for="EvidBrojNatječaj" asp-items="ViewBag.Natječaji">
+            <option selected value="" disabled>Odaberite natječaj</option>
+        </select>
+    </div>
+
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Spremi</button>
+        <a asp-action="Index" asp-route-page="@ViewBag.Page" asp-route-sort="@ViewBag.Sort" asp-route-ascending="@ViewBag.Ascending" class=" btn btn-secondary">Odustani</a>
+    </div>
+</form>
+
+@section scripts {
+    <partial name="IncludeValidation" />
+}

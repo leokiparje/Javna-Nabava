@@ -1,0 +1,120 @@
+﻿@model JavnaNabava.ViewModels.ZaposlenikPrilogViewModel
+
+
+
+
+@{
+    ViewData["Title"] = "Popis priloga zaposlenika";
+}
+<pager page-info="@Model.PagingInfo" page-title="Unesite željenu stranicu" page-action="Index" class="float-right">
+
+</pager>
+
+<div>Popis priloga zaposlenika</div>
+
+<h6>Jednostavni tablični prikaz - prikaz naziva iz roditeljske tablice, odabir vrijednosti vezanih podataka korištenjem padajuće liste</h6>
+
+
+
+
+<a asp-action="Create" class="btn btn-secondary">Unesi novi prilog</a>
+
+<table class="table table-sm table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                <a asp-route-sort="1"
+                   asp-route-page="@Model.PagingInfo.CurrentPage"
+                   asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? !Model.PagingInfo.Ascending: true)">
+                    ID
+                </a>
+
+            </th>
+            <th>
+                <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage"
+                   asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? !Model.PagingInfo.Ascending: true)">
+                    Naziv priloga
+                </a>
+            </th>
+
+            <th>
+                <a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage"
+                   asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? !Model.PagingInfo.Ascending: true)">
+                    OibZaposlenika
+                </a>
+            </th>
+
+            <th>
+                <a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage"
+                   asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? !Model.PagingInfo.Ascending: true)">
+                    Ime zaposlenika
+                </a>
+            </th>
+
+            <th>
+                <a asp-route-sort="5" asp-route-page="@Model.PagingInfo.CurrentPage"
+                   asp-route-ascending="@(Model.PagingInfo.Sort == 5 ? !Model.PagingInfo.Ascending: true)">
+                    Prezime zaposlenika
+                </a>
+            </th>
+
+            <th>
+                <a asp-route-sort="6" asp-route-page="@Model.PagingInfo.CurrentPage"
+                   asp-route-ascending="@(Model.PagingInfo.Sort == 6 ? !Model.PagingInfo.Ascending: true)">
+                    Vrijedi od
+                </a>
+            </th>
+
+            <th>
+                <a asp-route-sort="7" asp-route-page="@Model.PagingInfo.CurrentPage"
+                   asp-route-ascending="@(Model.PagingInfo.Sort == 7 ? !Model.PagingInfo.Ascending: true)">
+                    Vrijedi do
+                </a>
+            </th>
+
+            <th>
+                <a asp-route-sort="8" asp-route-page="@Model.PagingInfo.CurrentPage"
+                   asp-route-ascending="@(Model.PagingInfo.Sort == 8 ? !Model.PagingInfo.Ascending: true)">
+                    Link na prilog
+                </a>
+            </th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var zaposlenikPrilog in Model.ZaposleniciPrilozi)
+        {
+            <tr>
+                <td class="text-left">@zaposlenikPrilog.IdPrilog</td>
+                <td class="text-left">@zaposlenikPrilog.IdPrilogNavigation.NazivPrilog</td>
+                <td class="text-left">@zaposlenikPrilog.OibZaposlenik</td>
+                <td class="text-left">@zaposlenikPrilog.OibZaposlenikNavigation.ImeZaposlenik</td>
+                <td class="text-left">@zaposlenikPrilog.OibZaposlenikNavigation.PrezimeZaposlenik</td>
+                <td class="text-left">@zaposlenikPrilog.VrijediOd</td>
+                <td class="text-left">@zaposlenikPrilog.VrijediDo</td>
+                <td class="text-left">
+                    <a href=" @zaposlenikPrilog.LinkNaPrilog">link</a>
+
+                </td>
+
+                <td class="btn-group">
+
+
+
+
+                    <!--                 <form asp-action="Delete" method="POST"
+                              asp-route-page="@Model.PagingInfo.CurrentPage"
+                              asp-route-sort="@Model.PagingInfo.Sort"
+                              asp-route-ascending="@Model.PagingInfo.Ascending">
+
+                            <input type="hidden" name="zp" value="@zaposlenikPrilog" />
+                            <button type="submit" class="btn btn-sm btn-danger delete" title="Obriši"></button>
+                            <i class="fas fa-trash-alt"></i>
+                        </form>-->
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

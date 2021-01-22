@@ -1,0 +1,46 @@
+﻿
+@model Povjerenstvo
+
+@{
+    ViewBag.Title = "Novo povjerenstvo";
+}
+
+<h2>Unos novog povjerenstva</h2>
+
+<form asp-action="Create" method="post">
+
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="NazivPovjerenstva"></label>
+        <div><span asp-validation-for="NazivPovjerenstva" class="text-danger"></span></div>
+        <input asp-for="NazivPovjerenstva" class="form-control" />
+        <!--
+        <input asp-for="NazivPovjerenstva" class="form-control" data-autocomplete="povjerenstvo"
+               data-autocomplete-placeholder-name="nazivpovjerenstvo"
+               value="at(icon)Model.NazivPovjerenstva" />
+        <input type="hidden" asp-for="IdPovjerenstva" data-autocomplete-placeholder="nazivpovjerenstvo" />
+        -->
+    </div>
+    <div class="form-group">
+        <label asp-for="IdPovjerenstva"></label>
+        <div><span asp-validation-for="IdPovjerenstva" class="text-danger"></span></div>
+        <input asp-for="IdPovjerenstva" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="EvidBrojNatječaj"></label>
+        <div><span asp-validation-for="EvidBrojNatječaj" class="text-danger"></span></div>
+        <select class="form-control" asp-for="EvidBrojNatječaj" asp-items="ViewBag.natječaji">
+            <option selected value="" disabled>Odaberite natječaj</option>
+        </select>
+    </div>
+
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+        <a asp-action="Index" class="btn btn-secondary">Odustani</a>
+    </div>
+
+</form>
+
+@section scripts{
+    <partial name="IncludeValidation" />
+}

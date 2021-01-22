@@ -1,0 +1,44 @@
+﻿@model StavkaUTroškovniku
+
+@{
+    ViewBag.Title = "Ažuriranje stavke u troškovniku";
+}
+
+<h2>Ažuriranje stavki u troškovnicima</h2>
+<form asp-route-page="@ViewBag.Page"
+      asp-route-sort="@ViewBag.Sort"
+      asp-route-ascending="@ViewBag.Ascending"
+      asp-action="Edit"
+      method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="NazivStavke"></label>
+        <div><span asp-validation-for="NazivStavke" class="text-danger" /></div>
+        <input asp-for="NazivStavke" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="TraženaKoličina"></label>
+        <div><span asp-validation-for="TraženaKoličina" class="text-danger" /></div>
+        <input asp-for="TraženaKoličina" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="IdVrste"></label>
+        <div><span asp-validation-for="IdVrste" class="text-danger" /></div>
+        <select class="form-control" asp-for="IdVrste" asp-items="ViewBag.Vrste">
+            <option selected value="" disabled>Odaberite vrstu stavke</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="DodatneInformacije"></label>
+        <div><span asp-validation-for="DodatneInformacije" class="text-danger" /></div>
+        <input asp-for="DodatneInformacije" class="form-control" />
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Spremi</button>
+        <a asp-action="Index" asp-route-page="@ViewBag.Page"
+           asp-route-sort="@ViewBag.Sort"
+           asp-route-ascending="@ViewBag.Ascending"
+           class="btn btn-secondary">Odustani</a>
+    </div>
+</form>
+

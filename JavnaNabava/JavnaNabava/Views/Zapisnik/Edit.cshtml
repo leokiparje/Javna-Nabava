@@ -1,0 +1,85 @@
+﻿@model ZapisnikViewModel
+@{
+    ViewBag.Title = "Izmjena zapisnika";
+}
+
+<partial name="PreviousNext" />
+<hr />
+
+<div class="container">
+    <form id="dokument_form" method="post" asp-action="Edit"
+          asp-route-page="@ViewBag.Page"
+          asp-route-sort="@ViewBag.Sort"
+          asp-route-ascending="@ViewBag.Ascending"
+          asp-route-position="@ViewBag.Position">
+        <input type="hidden" asp-for="ZapisnikId" />
+        <div asp-validation-summary="All" class="form-group row"></div>
+
+        <div class="form-group row">
+            <label asp-for="ZapisnikId" class="col-sm-1 col-form-label"></label>
+            <div class="col-sm-1">
+                <input asp-for="ZapisnikId" readonly="readonly" class="form-control" />
+            </div>
+            <div class="col-sm-3">
+                <input class="form-control" data-autocomplete="zapisnik" asp-for="@Model.NazivZapisnik" />
+            </div>
+            <label asp-for="ispravnostZapisnik" class="col-sm-1 col-form-label"></label>
+            <label class="col-sm-2 col-form-label">@Model.ispravnostZapisnik</label>
+            <div class="col-sm-2">
+                <button id="save" type="submit" class="btn btn-sm btn-primary save" title="Spremi"><i class="fas fa-save"></i></button>
+                <a class="btn btn-sm btn-primary cancel"
+                   asp-action="Edit"
+                   asp-route-id="@Model.ZapisnikId"
+                   asp-route-page="@ViewBag.Page"
+                   asp-route-sort="@ViewBag.Sort"
+                   asp-route-ascending="@ViewBag.Ascending"
+                   asp-route-position="@ViewBag.Position"
+                   title="Osvježi">
+                    <i class="fas fa-sync-alt"></i>
+                </a>
+                <a class="btn btn-sm btn-primary cancel"
+                   asp-action="Index"
+                   asp-route-page="@ViewBag.Page"
+                   asp-route-sort="@ViewBag.Sort"
+                   asp-route-ascending="@ViewBag.Ascending"
+                   title="Odustani">
+                    <i class="fas fa-undo-alt"></i>
+                </a>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="IdPovjerenstva" class="col-sm-1 col-form-label"></label>
+            <div class="col-sm-1">
+                <input asp-for="IdPovjerenstva" readonly="readonly" class="form-control" data-autocomplete-placeholder="povjerenstvo" />
+            </div>
+            <div class="col-sm-3">
+                <input class="form-control" data-autocomplete="povjerenstvo" asp-for="@Model.NazivPovjerenstva" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="IdPonude" class="col-sm-1 col-form-label"></label>
+            <div class="col-sm-1">
+                <input asp-for="IdPonude" readonly="readonly" class="form-control text-center" data-autocomplete-placeholder="ponuda" />
+            </div>
+            <div class="col-sm-3">
+                <input class="form-control" data-autocomplete="ponuda" asp-for="@Model.TextPonude" />
+            </div>
+        </div>
+        <div class="col-sm-10">
+            <partial name="StavkeZapisnika" model="Model.StavkeZapisnika" />
+        </div>
+    </form>
+</div>
+
+<partial name="NovaStavkaTemplate" />
+
+@section styles{
+    <link rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.css" />
+}
+
+@section scripts{
+    <partial name="IncludeValidation" />
+    <script src="~/lib/jqueryui/jquery-ui.js"></script>
+    <script src="~/js/autocomplete.js" asp-append-version="true"></script>
+    <script src="~/js/Zapisnici.js" asp-append-version="true"></script>
+}

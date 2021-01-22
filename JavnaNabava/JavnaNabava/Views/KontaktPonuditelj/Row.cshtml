@@ -1,0 +1,20 @@
+﻿@model KontaktPonuditeljViewModel
+
+    <tr>
+        <td class="text-center">@Model.KontaktP</td>
+        <td class="text-center">@Model.NazivPonuditelj</td>
+        <td class="text-center">@Model.NazivVrstaKontakta</td>
+        <td>
+            <a class="btn btn-sm" title="Ažuriraj">
+                <i class="fas fa-edit"></i>
+            </a>
+        </td>
+        <td>
+            <form asp-action="Delete" method="POST">
+                <input type="hidden" name="id" value="@Model.KontaktP" />
+                <button data-kont="@Model.KontaktP" @*data-kont="@Model.OibPonuditelj,@Model.IdVrsteKontakta"*@ type="submit" class="btn btn-sm btn-danger deleteajax" title="Obriši">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </form>
+        </td>
+    </tr>

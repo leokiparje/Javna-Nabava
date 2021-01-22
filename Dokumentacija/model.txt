@@ -1,0 +1,7 @@
+Tamara Lužija- Zaposlenik i dokumenti zaposlenika ->vrsta dokumenta(kompetencije)
+Marija Danek - Plan nabave i natječaj, zajedno s naručiteljem(na plan nabave)
+Vedran Zoričić - Troškovnik i stavke troškovnika
+Nino Poletan – Ponuda i iznosi stavki
+Dora Horvat - Ponuditelj i kontakti
+Leo Li - Povjerenstvo->za natječaj i članovi povjerenstva(ovlaštenici koji pripadaju naručitelju)
+

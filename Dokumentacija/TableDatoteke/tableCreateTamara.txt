@@ -1,0 +1,45 @@
+CREATE TABLE ZAPOSLENIK
+(
+  oibZaposlenik CHAR(11) NOT NULL,
+  svjedodžba VARCHAR(MAX) NOT NULL,
+  radnoIskustvo VARCHAR(MAX) NOT NULL,
+  životopis VARCHAR(MAX) NOT NULL,
+  oibPonuditelj CHAR(11) NOT NULL,
+  idStrucneSpreme INT NOT NULL,
+  PRIMARY KEY (oibZaposlenik),
+  FOREIGN KEY (oibPonuditelj) REFERENCES PONUDITELJ(oibPonuditelj),
+  FOREIGN KEY (idStrucneSpreme) REFERENCES STRUCNASPREMA(idStrucneSpreme)
+);
+
+CREATE TABLE VRSTAKOMPETENCIJE
+(
+  idKompetencije INT NOT NULL,
+  nazivKompetencije VARCHAR(MAX) NOT NULL,
+  PRIMARY KEY (idKompetencije)
+);
+
+CREATE TABLE STRUCNASPREMA
+(
+  idStrucneSpreme INT NOT NULL,
+  naziv VARCHAR(10) NOT NULL,
+  PRIMARY KEY (idStrucneSpreme)
+);
+
+CREATE TABLE ZAPOSLENIKKOMPETENCIJE
+(
+  potvrdaValidacije INT NOT NULL,
+  oibZaposlenik INT NOT NULL,
+  idKompetencije INT NOT NULL,
+  PRIMARY KEY (oibZaposlenik, idKompetencije),
+  FOREIGN KEY (oibZaposlenik) REFERENCES ZAPOSLENIK(oibZaposlenik),
+  FOREIGN KEY (idKompetencije) REFERENCES VRSTAKOMPETENCIJE(idKompetencije)
+);
+
+CREATE TABLE REFERENCA
+(
+  prilogID INT NOT NULL,
+  oibZaposlenik CHAR(11) NOT NULL,
+  PRIMARY KEY (prilogID, oibZaposlenik),
+  FOREIGN KEY (prilogID) REFERENCES PRILOG(prilogID),
+  FOREIGN KEY (oibZaposlenik) REFERENCES ZAPOSLENIK(oibZaposlenik)
+);

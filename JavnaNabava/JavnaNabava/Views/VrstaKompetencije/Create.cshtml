@@ -1,0 +1,25 @@
+﻿@model VrstaKompetencije
+@using JavnaNabava.Models
+
+@{
+    ViewBag.Title = "Kreiranje kompetencije";
+}
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="IdKompetencije"> Sustav generira id.</label>
+    </div>
+    <div class="form-group">
+        <label asp-for="NazivKompetencije">Naziv</label>
+        <input asp-for="NazivKompetencije" class="form-control" />
+    </div>
+
+
+
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+        <a asp-action="Index" class="btn btn-secondary">Odustani</a>
+    </div>
+
+</form>

@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Pregled svih ponuditelja</title>
+    <link href="lib/jqueryui/themes/base/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="lib/jtable/lib/themes/lightcolor/blue/jtable.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12" id="ponuditelji">
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/jqueryui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="lib/jtable/lib/jquery.jtable.min.js"></script>
+    <script type="text/javascript" src="lib/jtable/lib/localization/jquery.jtable.hr.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#ponuditelji').jtable({
+                title: 'Popis ponuditelja',
+                paging: true,
+                pageSize: 10,
+                sorting: true,
+                defaultSorting: 'nazivPonuditelj DESC',
+                actions: {
+                    listAction: 'jtable/ponuditelj/getall',
+                    createAction: 'jtable/ponuditelj/create',
+                    updateAction: 'jtable/ponuditelj/update',
+                    deleteAction: 'jtable/ponuditelj/delete'
+                },
+                fields: {
+                    OibPonuditelj: {
+                        key: true,
+                        title: 'Oib ponuditelja',
+                        width: '10%',
+                        create: true
+                    },
+                    NazivPonuditelj: {
+                        title: 'Naziv ponuditelja',
+                        width: '30%'
+                    },
+                    AdresaPonuditelj: {
+                        title: 'Adresa ponuditelja',
+                        width: '30%'
+                    },
+                    SjedistePonuditelj: {
+                        title: 'Sjedište ponuditelja',
+                        width: '30%'
+                    }
+                }
+            });
+
+            $("#ponuditelji").jtable('load');
+
+            
+        });
+    </script>
+</body>
+</html>

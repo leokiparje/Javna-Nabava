@@ -1,0 +1,23 @@
+﻿
+@model JavnaNabava.ViewModels.PonudaStavkeViewModel
+
+<tr>
+  <td class="text-left">@Model.NazivStavke</td>
+  <td class="text-left">@Model.CijenaStavke</td>
+  <td class="text-left">@Model.KoličinaStavke</td>
+
+  
+  <td>
+    <a asp-action="Edit" asp-route-id="@Model.PonudaId" class="btn bt-sm" title="Ažuriraj">
+            <i class="fas fa-edit"></i>
+    </a>
+  </td>
+  <td>
+    <form asp-action="Delete" method="POST">
+      <input type="hidden" name="id" value="@Model.PonudaId" />
+      <button data-kont="@Model.PonudaId" type="submit" class="btn btn-sm btn-danger deleteajax" title="Obriši">
+        <i class="fas fa-trash-alt"></i>
+      </button>
+    </form>
+  </td>
+</tr>

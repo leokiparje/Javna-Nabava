@@ -1,0 +1,90 @@
+﻿@model ZapisniciViewModel
+
+@{
+    ViewBag.Title = "Zapisnici";
+}
+
+<div class="container">
+    <div class="form-group row">
+        <div class="col-sm-4">
+            <h2>Pregled svih zapisnika</h2>
+            <br />
+            <a asp-action="Create">Unos novog zapisnika</a>
+        </div>
+    </div>
+</div>
+
+<pager page-info="@Model.PagingInfo" page-action="Index" page-title="Unesite željenu stranicu" class="float-right"></pager>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th class="text-center">
+                <a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? !Model.PagingInfo.Ascending : true)">
+                    Id zapisnika
+                </a>
+            </th>
+            <th class="text-center">
+                <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? !Model.PagingInfo.Ascending : true)">
+                    Naziv zapisnika
+                </a>
+            </th>
+            <th class="text-center">
+                <a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? !Model.PagingInfo.Ascending : true)">
+                    Povjerenstvo
+                </a>
+            </th>
+            <th class="text-center">
+                <a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? !Model.PagingInfo.Ascending : true)">
+                    Tekst ponude
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var zapisnik in Model.Zapisnici)
+        {
+        <tr>
+            <td class="text-center">
+                <a asp-action="Show"
+                     asp-route-id="@zapisnik.ZapisnikId"
+                     asp-route-page="@Model.PagingInfo.CurrentPage"
+                     asp-route-sort="@Model.PagingInfo.Sort"
+                     asp-route-ascending="@Model.PagingInfo.Ascending"
+                     asp-route-position="zapisnik.Position">
+                    @zapisnik.ZapisnikId
+                </a>
+            </td>
+            <td class="text-center">@zapisnik.NazivZapisnik</td>
+            <td class="text-center">@zapisnik.NazivPovjerenstva</td>
+            <td class="text-center">@zapisnik.TekstPonude</td>
+
+            <td class="btn-group">
+
+                <a asp-action="Edit"
+                   asp-route-id="@zapisnik.ZapisnikId"
+                   asp-route-page="@Model.PagingInfo.CurrentPage"
+                   asp-route-sort="@Model.PagingInfo.Sort"
+                   asp-route-ascending="@Model.PagingInfo.Ascending"
+                   class="btn bt-sm" title="Ažuriraj"><i class="fas fa-edit"></i>
+                </a>
+
+                <form asp-action="Delete" method="post"
+                      asp-route-page="@Model.PagingInfo.CurrentPage"
+                      asp-route-sort="@Model.PagingInfo.Sort"
+                      asp-route-ascending="@Model.PagingInfo.Ascending">
+                    <input type="hidden" name="zapisnikID" value="@zapisnik.ZapisnikId" />
+                    <button type="submit" class="btn btn-sm btn-danger delete" title="Obriši"><i class="fas fa-trash-alt"></i> </button>
+                </form>
+
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts {
+    <script src="~/lib/jquery/jquery-ui.js"></script>
+    <script src="~/js/pager.js" asp-append-version="true"></script>
+}

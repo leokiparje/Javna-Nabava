@@ -1,0 +1,22 @@
+﻿@model Troškovnik
+
+@{
+    ViewBag.Title = "Novi troškovnik";
+}
+<h2>Unos novog troškovnika</h2>
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All"></div>
+    
+   
+    <div class="form-group">
+        <label asp-for="EvidBrojNatječaj"></label>
+        <div><span asp-validation-for="EvidBrojNatječaj" class="text-danger" /></div>
+        <select class="form-control" asp-for="EvidBrojNatječaj" asp-items="ViewBag.Natječaji">
+            <option selected value="" disabled>Odaberite natječaj</option>
+        </select>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+        <a asp-action="Index" class="btn btn-secondary">Odustani</a>
+    </div>
+</form>

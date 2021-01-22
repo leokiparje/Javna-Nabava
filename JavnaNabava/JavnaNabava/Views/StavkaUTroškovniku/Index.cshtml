@@ -1,0 +1,74 @@
+﻿@model JavnaNabava.ViewModels.StavkeUTroškovnikuViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Stavke u troškovnicima</h2>
+<h6>
+    Jednostavni tablični prikaz - prikaz naziva preko stranog ključa, odabir vrijednosti vezanih podataka korištenjem padajuće liste
+    straničenje i sortiranje na serverskoj strani,
+    dodavanje novog podatka, ažuriranje jednostavnog podatka, validacija
+</h6>
+<a asp-action="Create">Unos nove stavke u troškovniku</a>
+
+<pager page-info="@Model.PagingInfo" page-title="Unesite željenu stranicu"
+       page-action="Index" class="float-right">
+</pager>
+<table class="table table-sm table-striped table-hover" id="tableStavkeUTroškovniku">
+    <thead>
+        <tr>
+            @{
+                string[] nazivi = { "Naziv stavke", "Id Troškovnika", "Tražena količina", "Vrsta stavke", "Dodatne informacije" };
+                for (int i = 1; i <= nazivi.Length; i++)
+                {
+                    <th>
+                        <a asp-route-sort="@i"
+                           asp-route-page="@Model.PagingInfo.CurrentPage"
+                           asp-route-ascending="@(Model.PagingInfo.Sort == i ? !Model.PagingInfo.Ascending : true)">
+                            @nazivi[i - 1]
+                        </a>
+                    </th>
+                }
+            }
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var stavkaUTroškovniku in Model.StavkeUTroškovniku)
+        {
+            <tr>
+            <partial name="Row" model="stavkaUTroškovniku" />
+            <td class="btn-group">
+            <a asp-action="Edit"
+               asp-route-id="@stavkaUTroškovniku.IdStavke"
+               asp-route-page="@Model.PagingInfo.CurrentPage"
+               asp-route-sort="@Model.PagingInfo.Sort"
+               asp-route-ascending="@Model.PagingInfo.Ascending"
+               class="btn bt-sm" title="Ažuriraj">
+                <i class="fas fa-edit"></i>
+            </a>
+        
+            <form asp-action="Delete" method="post">
+                <input type="hidden" name="Id" value="@stavkaUTroškovniku.IdStavke" />
+
+                <button type="submit" class="btn btn-sm btn-danger delete" title="Obriši">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </form>
+            </td>
+            </tr>
+        }
+
+        </tbody>
+
+    </table>
+
+@section scripts {
+    <script src="~/js/pager.js" asp-append-version="true"></script>
+}
+
+@section styles{
+
+}
+

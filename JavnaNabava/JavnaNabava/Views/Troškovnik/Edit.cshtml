@@ -1,0 +1,106 @@
+﻿@model TroškovnikViewModel
+@{
+    ViewBag.Title = "Izmjena troškovnika br. " + @Model.TroškovnikId;
+}
+
+<div class="container">
+
+    <partial name="PreviousNext" model="@Model" />
+    <hr />
+    <div class="container">
+        <form id="troškovnik_form" method="post" asp-action="Edit"
+              asp-route-page="@ViewBag.Page"
+              asp-route-sort="@ViewBag.Sort"
+              asp-route-ascending="@ViewBag.Ascending"
+              asp-route-filter="@ViewBag.Filter">
+            <input asp-for="TroškovnikId" type="hidden" />
+            <div asp-validation-summary="All" class="form-group row"></div>
+            <div class="form-group row">
+                <label asp-for="NazivNatječaja"></label>
+                <div><span asp-validation-for="NazivNatječaja" class="text-danger" /></div>
+                <select class="form-control" asp-for="IdNatječaja" asp-items="ViewBag.Natječaji">
+                    <option selected value="@Model.IdNatječaja">@Model.NazivNatječaja</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <button id="save" type="submit" class="btn btn-sm btn-primary save" title="Spremi"><i class="fas fa-save"></i></button>
+                <a asp-action="Edit"
+                   asp-route-id="@Model.TroškovnikId"
+                   asp-route-page="@ViewBag.Page"
+                   asp-route-sort="@ViewBag.Sort"
+                   asp-route-ascending="@ViewBag.Ascending"
+                   class="btn btn-sm btn-primary cancel" title="Osvježi">
+                    <i class="fas fa-sync-alt"></i>
+                </a>
+                <a class="btn btn-sm btn-primary cancel"
+                   asp-action="Index"
+                   asp-route-page="@ViewBag.Page"
+                   asp-route-sort="@ViewBag.Sort"
+                   asp-route-ascending="@ViewBag.Ascending"
+                   asp-route-filter="@ViewBag.Filter"
+                   title="Povratak na popis troškovnika">
+                    <i class="fas fa-undo-alt"></i>
+                </a>
+            </div>
+        </form>
+    </div>
+
+
+    
+
+    <div class="col-sm-12">
+        <partial name="Stavke" model="Model.Stavke" />
+    </div>
+    <partial name="NovaStavkaTemplate" />
+    @*<div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        @{
+                            string[] nazivi = { "IdStavke", "Naziv stavke", "Tražena količina", "Vrsta stavke", "Dodatne informacije" };
+                            for (int i = 0; i < nazivi.Length; i++)
+                            {
+                                <th class="text-center">
+                                    @nazivi[i]
+                                </th>
+                            }
+                        }
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var stavka in Model.Stavke)
+                    {
+                        <tr>
+                            <td class="text-center col-sm-1">
+                                @stavka.IdStavke
+                            </td>
+                            <td class="text-center col-sm-1">
+                                @stavka.NazivStavke
+                            </td>
+                            <td class="text-center col-sm-1">
+                                @stavka.TraženaKoličina
+                            </td>
+                            <td class="text-center col-sm-2">
+                                @stavka.NazivVrste
+                            </td>
+                            <td class="text-center col-sm-2">
+                                @stavka.DodatneInformacije
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    *@
+</div>
+@section styles{
+    <link rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.css" />
+}
+
+@section scripts{
+    <partial name="IncludeValidation" />
+    <script src="~/lib/jqueryui/jquery-ui.js"></script>
+    <script src="~/js/autocomplete.js" asp-append-version="true"></script>
+    <script src="~/js/dokumenti.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,43 @@
+﻿@using JavnaNabava.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model PonudaStavke
+@{
+  ViewBag.Title = "Nova PonudaStavke";
+}
+
+<h2>Unos ponudeStavke</h2>
+
+<form asp-action="Create" method="post">
+  <div asp-validation-summary="All"></div>
+  <div class="form-group">
+    <label asp-for="PonudaId"></label>
+    <div><span asp-validation-for="PonudaId" class="text-danger"></span></div>
+    <select class="form-control" asp-for="IdStavke" asp-items="ViewBag.Ponuda">
+      <option disabled selected value="">Odaberite ponudu</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label asp-for="IdStavke"></label>
+    <div><span asp-validation-for="IdStavke" class="text-danger"></span></div>
+    <select class="form-control" asp-for="IdStavke" asp-items="ViewBag.StavkaUTroškovniku">
+      <option disabled selected value="">Odaberite Stavku</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label asp-for="CijenaStavke"></label>
+    <div><span asp-validation-for="CijenaStavke" class="text-danger"></span></div>
+    <input asp-for="CijenaStavke" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label asp-for="KoličinaStavke"></label>
+    <div><span asp-validation-for="KoličinaStavke" class="text-danger"></span></div>
+    <input asp-for="KoličinaStavke" class="form-control" />
+  </div>
+  <div class="text-center">
+    <button class="btn btn-primary" type="submit">Dodaj</button>
+    <a asp-action="Index" class="btn btn-default">Odustani</a>
+  </div>
+</form>
+@section scripts {
+  <partial name="IncludeValidation" />
+}

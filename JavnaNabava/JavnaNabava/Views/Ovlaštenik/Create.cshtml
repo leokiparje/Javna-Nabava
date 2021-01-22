@@ -1,0 +1,52 @@
+﻿
+@model Ovlaštenik
+
+@{
+    ViewBag.Title = "Novi ovlaštenik";
+}
+
+<h2>Unos novog ovlaštenika</h2>
+
+<form asp-action="Create" method="post">
+
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="ImeOvlaštenik"></label>
+        <div><span asp-validation-for="ImeOvlaštenik" class="text-danger"></span></div>
+        <input asp-for="ImeOvlaštenik" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="PrezimeOvlaštenik"></label>
+        <div><span asp-validation-for="PrezimeOvlaštenik" class="text-danger"></span></div>
+        <input asp-for="PrezimeOvlaštenik" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="OibOvlaštenik"></label>
+        <div><span asp-validation-for="OibOvlaštenik" class="text-danger"></span></div>
+        <input asp-for="OibOvlaštenik" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="OibNaručitelja"></label>
+        <div><span asp-validation-for="OibNaručitelja" class="text-danger"></span></div>
+        <select class="form-control" asp-for="OibNaručitelja" asp-items="ViewBag.Naručitelji">
+            <option selected value="" disabled>Odaberite naručitelja</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="IdPovjerenstva"></label>
+        <div><span asp-validation-for="IdPovjerenstva" class="text-danger"></span></div>
+        <select class="form-control" asp-for="IdPovjerenstva" asp-items="ViewBag.Povjerenstva">
+            <option selected value="" disabled>Odaberite povjerenstvo</option>
+        </select>
+    </div>
+
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+        <a asp-action="Index" class="btn btn-secondary">Odustani</a>
+    </div>
+
+</form>
+
+@section scripts{ 
+    <partial name="IncludeValidation" />
+}

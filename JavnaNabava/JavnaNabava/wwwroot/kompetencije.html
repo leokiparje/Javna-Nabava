@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Pregled svih kompetencija</title>
+    <link href="lib/jqueryui/themes/base/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="lib/jtable/lib/themes/lightcolor/blue/jtable.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12" id="kompetencije">
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/jqueryui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="lib/jtable/lib/jquery.jtable.min.js"></script>
+    <script type="text/javascript" src="lib/jtable/lib/localization/jquery.jtable.hr.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#kompetencije').jtable({
+                title: 'Popis kompetencija',
+                paging: true,
+                pageSize: 10,
+                sorting: true,
+                defaultSorting: 'NazivKompetencije',
+                actions: {
+                    listAction: 'jtable/kompetencija/getall',
+                    createAction: 'jtable/kompetencija/create',
+                    updateAction: 'jtable/kompetencija/update',
+                    deleteAction: 'jtable/kompetencija/delete'
+                },
+                fields: {
+                    IdKompetencije: {
+                        key: true,
+                        title: 'Id kompetencije',
+                        width: '10%',
+                        create: true
+                    },
+                    NazivKompetencije: {
+                        title: 'Naziv kompetencije',
+                        width: '30%'
+                    },
+                    SjedišteObrazovneUstanove: {
+                        title: 'Sjedište obrazovne ustanove',
+                        width: '20%'
+                    },
+                    PočetakObrazovanja: {
+                        title: 'Početak obrazovanja',
+                        width: '20%'
+                    },
+                    KrajObrazovanja: {
+                        title: 'Kraj obrazovanja',
+                        width: '20%'
+                    }
+                }
+            });
+
+            $("#kompetencije").jtable('load');
+
+            
+        });
+    </script>
+</body>
+</html>

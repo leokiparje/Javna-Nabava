@@ -1,0 +1,51 @@
+CREATE TABLE Ponuditelj
+(
+  oibPonuditelj CHAR(11) NOT NULL,
+  sjedištePonuditelj VARCHAR(50) NOT NULL,
+  adresaPonuditelj VARCHAR(50) NOT NULL,
+  nazivPonuditelj VARCHAR(50) NOT NULL,
+  PRIMARY KEY (oibPonuditelj)
+);
+
+CREATE TABLE Konzorcij
+(
+  nazivKonzorcij VARCHAR(50) NOT NULL,
+  idKonzorcij INT NOT NULL,
+  PRIMARY KEY (idKonzorcij)
+);
+
+CREATE TABLE VrstaKontakta
+(
+  idVrsteKontakta INT NOT NULL,
+  nazivVrsteKontakta VARCHAR(50) NOT NULL,
+  PRIMARY KEY (idVrsteKontakta)
+);
+
+CREATE TABLE članoviKonzorcija
+(
+  oibPonuditelj CHAR(11) NOT NULL,
+  idKonzorcij INT NOT NULL,
+  PRIMARY KEY (oibPonuditelj, idKonzorcij),
+  FOREIGN KEY (oibPonuditelj) REFERENCES Ponuditelj(oibPonuditelj),
+  FOREIGN KEY (idKonzorcij) REFERENCES Konzorcij(idKonzorcij)
+);
+
+CREATE TABLE kontaktPonuditelj
+(
+  kontaktP VARCHAR(30) NOT NULL,
+  oibPonuditelj CHAR(11) NOT NULL,
+  idVrsteKontakta INT NOT NULL,
+  PRIMARY KEY (oibPonuditelj, idVrsteKontakta),
+  FOREIGN KEY (oibPonuditelj) REFERENCES Ponuditelj(oibPonuditelj),
+  FOREIGN KEY (idVrsteKontakta) REFERENCES VrstaKontakta(idVrsteKontakta)
+);
+
+CREATE TABLE kontaktKonzorcij
+(
+  kontaktK VARCHAR(30) NOT NULL,
+  idKonzorcij INT NOT NULL,
+  idVrsteKontakta INT NOT NULL,
+  PRIMARY KEY (idKonzorcij, idVrsteKontakta),
+  FOREIGN KEY (idKonzorcij) REFERENCES Konzorcij(idKonzorcij),
+  FOREIGN KEY (idVrsteKontakta) REFERENCES VrstaKontakta(idVrsteKontakta)
+);

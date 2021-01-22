@@ -1,0 +1,70 @@
+﻿@model JavnaNabava.ViewModels.NaručiteljViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, JavnaNabava
+
+
+@{ ViewData["Title"] = "Popis naručitelja"; }
+
+<a asp-action="Create">Unos novog naručitelja</a>
+
+<h6>Jednostavni tablični prikaz, straničenje i sortiranje na serverskoj strani, dodavanje novog podatka, ažuriranje jednostavnog podatka, brisanje podatka, potvrda prije brisanja podatka, validacija</h6>
+
+<pager page-info="@Model.PagingInfo" page-title="Unesite željenu stranicu" page-action="Index" class="float-right">
+
+</pager>
+
+<table class="table table-sm table-striped table-hover">
+    <thead>
+        <tr>
+            <th class="text-center">
+                <a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? !Model.PagingInfo.Ascending : true)">
+                    OIB
+                </a>
+            </th>
+            <th class="text-center">
+                <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? !Model.PagingInfo.Ascending : true)">
+                    Naziv
+                </a>
+            </th>
+            <th class="text-center">
+                <a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? !Model.PagingInfo.Ascending : true)">
+                    Adresa
+                </a>
+            </th>
+            <th class="text-center">
+                <a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? !Model.PagingInfo.Ascending : true)">
+                    Poštanski broj
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var naručitelj in Model.Naručitelji)
+        {
+            <tr>
+                <td class="text-center">@naručitelj.OibNaručitelja</td>
+                <td class="text-center">@naručitelj.NazivNaručitelja</td>
+                <td class="text-center">@naručitelj.AdresaNaručitelja</td>
+                <td class="text-center">@naručitelj.PoštanskiBrojNaručitelja</td>
+                <td class="btn-group">
+                    <a asp-action="Edit" asp-route-id="@naručitelj.OibNaručitelja" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-sort="@Model.PagingInfo.Sort" asp-route-ascending="@Model.PagingInfo.Ascending" class="btn bt-sm" title="Ažuriraj">
+                        <i class="fas fa-edit"></i>
+                    </a>
+
+
+                    <form asp-action="Delete" method="POST" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-sort="@Model.PagingInfo.Sort" asp-route-ascending="@Model.PagingInfo.Ascending">
+                        <input type="hidden" name="OibNaručitelja" value="@naručitelj.OibNaručitelja" />
+                        <button type="submit" class="btn btn-sm btn-danger delete" title="Obriši">
+                            @*delete je nas stil*@
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+}
+    </tbody>
+</table>
+
+@section scripts {
+    <script src="~/js/pager.js" asp-append-version="true"></script>
+}

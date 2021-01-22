@@ -1,0 +1,34 @@
+﻿@model Naručitelj
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="OibNaručitelja"></label>
+        <input asp-for="OibNaručitelja" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="NazivNaručitelja"></label>
+        <input asp-for="NazivNaručitelja" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AdresaNaručitelja"></label>
+        <input asp-for="AdresaNaručitelja" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PoštanskiBrojNaručitelja"></label>
+        <input asp-for="PoštanskiBrojNaručitelja" class="form-control" />
+    </div>
+
+
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+        <a asp-action="Index" class="btn btn-secondary">Odustani</a>
+    </div>
+
+</form>
+
+@section scripts {
+    <partial name="IncludeValidation" />
+}

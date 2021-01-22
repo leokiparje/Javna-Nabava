@@ -1,0 +1,53 @@
+﻿@model IEnumerable<StavkaUTroškovnikuViewModel>
+        <table class="table table-striped" id="table-stavke">
+            <thead>
+                <tr>
+                    @{
+                        string[] nazivi = { "IdStavke", "Naziv stavke", "Tražena količina", "Vrsta stavke", "Dodatne informacije" };
+                        for (int i = 0; i < nazivi.Length; i++)
+                        {
+                            <th class="text-center">
+                                @nazivi[i]
+                            </th>
+                        }
+                    }
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var stavka in Model)
+                {
+            
+                
+                <tr>
+                    <td class="text-center ">
+
+                        <input type="hidden" name="Stavke.Index" value="@stavka.IdStavke" />
+                        <input type="hidden" name="Stavke[@stavka.IdStavke].IdStavke" value="@stavka.IdStavke" />
+                        @stavka.IdStavke
+                    </td>
+                    <td class="text-center">
+                        <input  name="Stavke[@stavka.IdStavke].NazivStavke" value="@stavka.NazivStavke" />
+                    </td>
+                    <td class="text-center">
+                        <input  name="Stavke[@stavka.IdStavke].TraženaKoličina" value="@stavka.TraženaKoličina" />
+                    </td>
+                    <td class="text-center">
+                        <select  name="Stavke[@stavka.IdStavke].IdVrste" value="@stavka.IdVrste" asp-items="ViewBag.Vrste">
+                            <option selected value="@stavka.IdVrste">@stavka.NazivVrste</option>
+                        </select>
+                    </td>
+                    
+                    <td class="text-center">
+                        <input name="Stavke[@stavka.IdStavke].DodatneInformacije" value="@stavka.DodatneInformacije" />
+                    </td>
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-danger deleterow" title="Izbaci">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+                </tbody>
+            </table>
+    

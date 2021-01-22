@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Pregled svih ovlaštenika</title>
+    <link href="lib/jqueryui/themes/base/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="lib/jtable/lib/themes/lightcolor/blue/jtable.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12" id="ovlaštenici">
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/jqueryui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="lib/jtable/lib/jquery.jtable.min.js"></script>
+    <script type="text/javascript" src="lib/jtable/lib/localization/jquery.jtable.hr.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#ovlaštenici').jtable({
+                title: 'Popis ovlaštenika',
+                paging: true,
+                pageSize: 10,
+                sorting: true,
+                defaultSorting: 'nazivOvlaštenik DESC',
+                actions: {
+                    listAction: 'jtable/ovlaštenik/getall',
+                    createAction: 'jtable/ovlaštenik/create',
+                    updateAction: 'jtable/ovlaštenik/update',
+                    deleteAction: 'jtable/ovlaštenik/delete'
+                },
+                fields: {
+                    OibOvlaštenik: {
+                        key: true,
+                        title: 'Oib ovlaštenika',
+                        width: '20%',
+                        create: true
+                    },
+                    ImeOvlaštenik: {
+                        title: 'Ime ovlaštenika',
+                        width: '20%'
+                    },
+                    PrezimeOvlaštenik: {
+                        title: 'Prezime ovlaštenika',
+                        width: '20%'
+                    },
+                    IdPovjerenstva: {
+                        title: 'Id povjerenstva',
+                        width: '20%'
+                    },
+                    OibNaručitelj: {
+                        title: 'Oib naručitelja',
+                        width: '20%'
+                    }
+                }
+            });
+
+            $("#ovlaštenici").jtable('load');
+        });
+    </script>
+</body>
+</html>

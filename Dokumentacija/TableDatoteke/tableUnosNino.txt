@@ -1,0 +1,23 @@
+INSERT INTO PONUDA(
+    ponudaID, text, prilogID, ponudaStavkeID, ponuditeljID , natjecajID)
+    VALUES 
+    (1, 'opis prve ponude lala', 1,1,1,1),
+    (2,'opis druge ponude',2,2,3,1);
+
+INSERT INTO PRILOG(
+    prilogID, izjavaONekaznjavalju, potvrdaPorezneUprave, izvadakIzSudskogRegistra)
+    VALUES 
+    (1, 'nisam bila kaznjavana MAJKE MI','potvrda porezne uprave 1', 'izvadili su me iz sudskog registra 1' ),
+    (2, 'nisam kriv','potvrda porezne uprave 2', 'izvadili su me iz sudskog registra 2' );
+
+INSERT INTO iznosStavke(
+    cijenaStavke ,kolicinaStavke ,ponudaID, stavkaUTroskovnikuID)
+    VALUES 
+    (5.20, 3, 1,1),
+    (50.60,8,2,2);
+INSERT INTO referenca(
+    prilogID,zaposlenikID)
+    VALUES
+    (1,1),
+    (1,2),
+    (2,3);

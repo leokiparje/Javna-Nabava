@@ -1,0 +1,43 @@
+﻿@model Ovlaštenik
+
+@{
+    ViewBag.Title = "Ažuriranje ovlaštenika";
+}
+
+<form asp-action="Edit" method="post" asp-route-page="@ViewBag.Page" asp-route-sort="@ViewBag.Sort" asp-route-ascending="@ViewBag.Ascending">
+    <div asp-validation-summary="All"></div>
+
+    <div class="form-group">
+        <label asp-for="ImeOvlaštenik"></label>
+        <div><span asp-validation-for="ImeOvlaštenik" class="text-danger"></span></div>
+        <input asp-for="ImeOvlaštenik" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="PrezimeOvlaštenik"></label>
+        <div><span asp-validation-for="PrezimeOvlaštenik" class="text-danger"></span></div>
+        <input asp-for="PrezimeOvlaštenik" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="IdPovjerenstva"></label>
+        <div><span asp-validation-for="IdPovjerenstva" class="text-danger"></span></div>
+        <select class="form-control" asp-for="IdPovjerenstva" asp-items="ViewBag.Povjerenstva">
+            <option selected value="" disabled>Odaberite povjerenstvo</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="OibNaručitelja"></label>
+        <div><span asp-validation-for="OibNaručitelja" class="text-danger"></span></div>
+        <select class="form-control" asp-for="OibNaručitelja" asp-items="ViewBag.Naručitelji">
+            <option selected value="" disabled>Odaberite naručitelja</option>
+        </select>
+    </div>
+
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Spremi</button>
+        <a asp-action="Index" asp-route-page="@ViewBag.Page" asp-route-sort="@ViewBag.Sort" asp-route-ascending="@ViewBag.Ascending" class=" btn btn-secondary">Odustani</a>
+    </div>
+</form>
+
+@section scripts {
+    <partial name="IncludeValidation" />
+}

@@ -1,0 +1,69 @@
+﻿@model ZaposlenikViewModel
+@{
+    ViewBag.Title = "Zaposlenik br. " + @Model.oibZaposlenik;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>
+                @Model.oibZaposlenik - @Model.ImeZaposlenik @Model.PrezimeZaposlenik
+            </h4>
+        </div>
+        <div class="col-md-6">
+            <div class="row float-right">
+                <div class="mr-2">
+                    <a asp-action="Edit" asp-route-id="@Model.oibZaposlenik" class="btn btn-warning btn-sm"
+                        title="Ažuriraj"><i class="fas fa-edit"></i></a>
+                </div>
+                <div class="mr-2">
+                    <form asp-action="Delete" method="post" asp-route-page="@ViewBag.Page"
+                        asp-route-sort="@ViewBag.Sort" asp-route-ascending="@ViewBag.Ascending">
+                        <input class="form-control" asp-for="@Model.oibZaposlenik" type="hidden" />
+                        <button type="submit" class="btn btn-sm btn-danger delete" title="Obriši"><i
+                                class="fas fa-trash-alt"></i></button>
+                    </form>
+                </div>
+                <div class="mr-2">
+                    <a class="btn btn-sm btn-primary cancel" asp-action="Index" asp-route-page="@ViewBag.Page"
+                        asp-route-sort="@ViewBag.Sort" asp-route-ascending="@ViewBag.Ascending"
+                        title="Povratak na popis zapisnika">
+                        <i class="fas fa-backward"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        DatumRodena -> @Model.DatumRođenja
+        <br />
+        Kompetencija -> @Model.KompetencijaName
+        <br />
+        Sprema -> @Model.SpremaName
+        <br />
+        Mjesto -> @Model.MjestoPrebivališta
+    </div>
+
+    <table class="table table-sm table-striped table-hover">
+        <thead>
+            <tr>
+                <th> Id priloga</th>
+
+                <th> Naziv priloga</th>
+                <th>Link na prilog</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var prilog in Model.Prilozi)
+            {
+                <tr>
+                    <td class="text-left">@prilog.IdPriloga</td>
+                    <td class="text-left">@prilog.nazivPriloga</td>
+                    <td class="text-left"><a href="@prilog.nazivPriloga">link</a></td>
+
+                </tr>
+            }
+        </tbody>
+
+    </table>

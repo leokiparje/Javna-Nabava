@@ -1,0 +1,49 @@
+﻿@model Naručitelj
+@using JavnaNabava.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@{
+    ViewBag.Title = "Ažuriranje natječaja";
+}
+
+
+
+<form asp-action="Edit"
+      asp-route-page="@ViewBag.Page"
+      asp-route-sort="@ViewBag.Sort"
+      asp-route-ascending="@ViewBag.Ascending"
+      method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="NazivNaručitelja"></label>
+        <input asp-for="NazivNaručitelja" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AdresaNaručitelja"></label>
+        <input asp-for="AdresaNaručitelja" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PoštanskiBrojNaručitelja"></label>
+        <input asp-for="PoštanskiBrojNaručitelja" class="form-control" />
+    </div>
+
+
+
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Ažuriraj</button>
+        <a asp-action="Index"
+           asp-route-page="@ViewBag.Page"
+           asp-route-sort="@ViewBag.Sort"
+           asp-route-ascending="@ViewBag.Ascending" class="btn btn-secondary">Odustani</a>
+    </div>
+
+</form>
+
+   
+
+@section scripts {
+    <partial name="IncludeValidation" />
+}

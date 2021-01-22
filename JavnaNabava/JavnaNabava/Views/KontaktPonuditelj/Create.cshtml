@@ -1,0 +1,42 @@
+﻿@using JavnaNabava.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model KontaktPonuditelj
+
+@{
+    ViewBag.Title = "Novi kontakt";
+}
+
+<h2>Unos kontakta</h2>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="KontaktP"></label>
+        <div><span asp-validation-for="KontaktP" class="text-danger"></span></div>
+        <input asp-for="KontaktP" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="OibPonuditelj"></label>
+        <div><span asp-validation-for="OibPonuditelj" class="text-danger"></span></div>
+        <select class="form-control" asp-for="OibPonuditelj" asp-items="ViewBag.Ponuditelji">
+            @*ViewBag.Ponuditelji -> sloziti u controlleru*@
+            <option selected value="" disabled>Odaberite ponuditelja</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="IdVrsteKontakta"></label>
+        <div><span asp-validation-for="IdVrsteKontakta" class="text-danger"></span></div>
+        <select class="form-control" asp-for="IdVrsteKontakta" asp-items="ViewBag.VrsteKontakta">
+            <option selected value="" disabled>Odaberite vrstu kontakta</option>
+        </select>
+    </div>
+
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+        <a asp-action="Index" class="btn btn-secondary">Odustani</a>
+    </div>
+</form>
+
+@section scripts {
+    <partial name="IncludeValidation" />
+}

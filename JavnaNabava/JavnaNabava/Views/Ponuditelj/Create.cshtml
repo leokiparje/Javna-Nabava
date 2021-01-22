@@ -1,0 +1,35 @@
+﻿@using JavnaNabava.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Ponuditelj
+
+@{
+    ViewBag.Title = "Dodavanje ponuditelja";
+}
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="OibPonuditelj"></label>
+        <input asp-for="OibPonuditelj" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="NazivPonuditelj"></label>
+        <input asp-for="NazivPonuditelj" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="AdresaPonuditelj"></label>
+        <input asp-for="AdresaPonuditelj" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SjedištePonuditelj"></label>
+        <input asp-for="SjedištePonuditelj" class="form-control" />
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+        <a asp-action="Index" class="btn btn-secondary">Odustani</a>
+    </div>
+</form>
+
+@section scripts {
+    <partial name="IncludeValidation" />
+}

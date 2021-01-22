@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Pregled svih dokumenata</title>
+    <link href="lib/jqueryui/themes/base/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="lib/jtable/lib/themes/lightcolor/blue/jtable.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12" id="dokumenti">
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/jqueryui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="lib/jtable/lib/jquery.jtable.min.js"></script>
+    <script type="text/javascript" src="lib/jtable/lib/localization/jquery.jtable.hr.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#dokumenti').jtable({
+                title: 'Popis dokumenata',
+                paging: true,
+                pageSize: 10,
+                sorting: true,
+                defaultSorting: 'Naslov',
+                actions: {
+                    listAction: 'jtable/dokument/getall',
+                    createAction: 'jtable/dokument/create',
+                    updateAction: 'jtable/dokument/update',
+                    deleteAction: 'jtable/dokument/delete'
+                },
+                fields: {
+                    DokumentId: {
+                        key: true,
+                        title: 'DokumentId',
+                        width: '10%',
+                        create: true
+                    },
+                    Naslov: {
+                        title: 'Naslov',
+                        width: '30%'
+                    },
+                    Vrsta: {
+                        title: 'Vrsta',
+                        width: '20%'
+                    },
+                    Blob: {
+                        title: 'Blob',
+                        width: '20%'
+                    },
+                    PonudaId: {
+                        title: 'PonudaId',
+                        width: '10%'
+                    },
+                    DatumPredaje: {
+                        title: 'DatumPredaje',
+                        width: '10%'
+                    }
+                }
+            });
+
+            $("#dokumenti").jtable('load');
+
+            
+        });
+    </script>
+</body>
+</html>

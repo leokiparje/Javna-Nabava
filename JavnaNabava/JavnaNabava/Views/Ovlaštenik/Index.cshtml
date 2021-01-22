@@ -1,0 +1,73 @@
+﻿@using JavnaNabava.ViewModels;
+@using JavnaNabava.Models;
+
+@model OvlaštenikViewModel
+
+@{
+    ViewData["Title"] = "Popis ovlaštenika";
+}
+
+<h2>Popis ovlaštenika</h2>
+
+<a asp-action="Create">Unos novog ovlaštenika</a>
+
+<pager page-info="@Model.PagingInfo" page-action="Index" page-title="Unesite željenu stranicu" class="float-right"></pager>
+
+<table class="table table-sm table-striped table-hover" id="tableovlastenika">
+    <thead>
+        <tr>
+            <th class="text-center">
+                <a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? !Model.PagingInfo.Ascending : true)">
+                    Ime ovlaštenika
+                </a>
+            </th>
+            <th class="text-center">
+                <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? !Model.PagingInfo.Ascending : true)">
+                    Prezime ovlaštenika
+                </a>
+            </th>
+            <th class="text-center">
+                <a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? !Model.PagingInfo.Ascending : true)">
+                    Id povjerenstva
+                </a>
+            </th>
+            <th class="text-center">
+                <a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? !Model.PagingInfo.Ascending : true)">
+                    Oib naručitelja
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ovlaštenik in Model.Ovlaštenici)
+        {
+        <tr>
+            <td class="text-center">@ovlaštenik.ImeOvlaštenik</td>
+            <td class="text-center">@ovlaštenik.PrezimeOvlaštenik</td>
+            <td class="text-center">@ovlaštenik.IdPovjerenstva</td>
+            <td class="text-center">@ovlaštenik.OibNaručitelja</td>
+
+            <td class="btn-group">
+
+                <a asp-action="Edit" asp-route-id="@ovlaštenik.OibOvlaštenik" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-sort="@Model.PagingInfo.Sort" asp-route-ascending="@Model.PagingInfo.Ascending" class="btn bt-sm" title="Ažuriraj">
+                    <i class="fas fa-edit"></i>
+                </a>
+
+                <form asp-action="Delete" method="post"
+                      asp-route-page="@Model.PagingInfo.CurrentPage"
+                      asp-route-sort="@Model.PagingInfo.Sort"
+                      asp-route-ascending="@Model.PagingInfo.Ascending">
+                    <input type="hidden" name="OibOvlaštenik" value="@ovlaštenik.OibOvlaštenik" />
+                    <button type="submit" class="btn btn-sm btn-danger delete" title="Obriši"><i class="fas fa-trash-alt"></i> </button>
+                </form>
+
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts {
+    <script src="~/js/pager.js" asp-append-version="true"></script>
+}

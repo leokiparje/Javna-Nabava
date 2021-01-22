@@ -1,0 +1,22 @@
+INSERT INTO ZAPOSLENIK (oibZaposlenik, svjedodžba, radnoIskustvo, životopis, oibPonuditelj, idStrucneSpreme) VALUES
+	(43842092517, 'csbvdlihsdbilvj', 'da', 'vdjskavjo', 43842092511, 3),
+	(43842092519, 'csbvdlihfdsasdfsdbilvj', 'da', 'avfvafvdjskavjo', 58597641198, 2),
+	(50563515527, 'fsagcsbvdlihsdbilvj', 'da', 'fghfdsvdjgfsskavjo', 50563515523, 3);
+
+INSERT INTO VRSTAKOMPETENCIJE (idKompetencije, nazivKompetencije) VALUES
+	(1, 'Kompetencija1'),
+	(2, 'Kompetencija2');
+
+INSERT INTO STRUCNASPREMA (idStrucneSpreme, naziv) VALUES
+	(1, 'ss1'),
+	(2, 'ss2');
+
+INSERT INTO ZAPOSLENIKKOMPETENCIJE (potvrdaValidacije, oibZaposlenik, idKompetencije) VALUES
+	('da', 43842092517, 1),
+	('da', 43842092519, 1),
+	('da', 50563515527, 2);
+
+
+INSERT INTO REFERENCA (prilogID, oibZaposlenik) VALUES
+	(1, 43842092517),
+	(2, 43842092519);
